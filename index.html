@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200">
+    <title>The Skin Architect | مهندس البشرة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Palette based on 'Kayani' Philosophy */
+            --primary-navy: #1e1b4b;      
+            --primary-indigo: #4338ca;    
+            --accent-teal: #14b8a6;       
+            --accent-rose: #e11d48;       
+            --accent-amber: #f59e0b;      
+            --accent-sky: #0ea5e9;        
+            
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-light: #e2e8f0;
+            
+            --font-ar: 'IBM Plex Sans Arabic', sans-serif;
+            --font-en: 'Montserrat', sans-serif;
+            
+            --shadow-card: 0 15px 35px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * { box-sizing: border-box; outline: none; }
+        
+        body {
+            font-family: var(--font-ar);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            text-align: center; /* Global Center Alignment */
+        }
+
+        .en-text {
+            font-family: var(--font-en);
+            direction: ltr;
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-indigo) 100%);
+            color: white;
+            padding: 100px 20px 180px;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
+        }
+
+        .hero-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 14px;
+            color: var(--accent-sky);
+            display: inline-block;
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px);
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin: 0 0 20px;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+        
+        .hero h1 span.ar-title { display: block; font-size: 42px; font-weight: 700; color: var(--accent-sky); margin-top: 10px; font-family: var(--font-ar); }
+
+        .hero p {
+            font-size: 20px;
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-weight: 300;
+        }
+
+        .hero-names {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            font-size: 18px;
+            flex-wrap: wrap;
+        }
+
+        /* Timeline Container */
+        .timeline-container {
+            max-width: 900px;
+            margin: -120px auto 50px;
+            position: relative;
+            padding: 0 20px;
+            z-index: 2;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-teal), var(--primary-indigo), var(--accent-sky));
+            transform: translateX(-50%);
+            border-radius: 4px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Module Card */
+        .module-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 50px 40px;
+            margin-bottom: 80px;
+            position: relative;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            text-align: center; /* Enforce Center */
+        }
+
+        .module-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-indigo);
+        }
+
+        /* Decorative Number */
+        .module-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 250px;
+            font-weight: 900;
+            color: rgba(241, 245, 249, 0.6);
+            z-index: 0;
+            font-family: var(--font-en);
+            pointer-events: none;
+        }
+
+        .card-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+
+        /* Header of Card */
+        .card-header {
+            margin-bottom: 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .module-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin-bottom: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .card-title h3 {
+            font-size: 14px;
+            color: var(--accent-sky);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            font-weight: 700;
+            font-family: var(--font-en);
+        }
+
+        .card-title h2 {
+            font-size: 32px;
+            color: var(--primary-navy);
+            margin: 10px 0 5px;
+            font-weight: 800;
+            font-family: var(--font-en);
+            line-height: 1.1;
+        }
+        
+        .card-title h2 span.ar-sub {
+            display: block;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary-indigo);
+            margin-top: 5px;
+            font-family: var(--font-ar);
+        }
+
+        /* Philosophy Box */
+        .philosophy-box {
+            background: linear-gradient(to bottom, rgba(67, 56, 202, 0.03), rgba(67, 56, 202, 0.08));
+            border-top: 3px solid var(--primary-indigo);
+            border-bottom: 3px solid var(--primary-indigo);
+            padding: 25px 40px;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            max-width: 80%;
+        }
+        
+        .philosophy-box p.en-quote {
+            font-family: var(--font-en);
+            font-size: 16px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .philosophy-box p.ar-quote {
+            font-size: 20px;
+            color: var(--text-main);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Content Grid */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Stacked for center focus */
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .topic-item {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Side accent for topics */
+        .topic-item::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: var(--border-light);
+            transition: background 0.3s;
+        }
+        .topic-item:hover::before { background: var(--primary-indigo); }
+
+        .topic-item:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transform: translateX(5px);
+        }
+
+        .topic-title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .topic-title .en-head {
+            font-family: var(--font-en);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-indigo);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .topic-title .ar-head {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-navy);
+        }
+
+        .topic-desc {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin: 0;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        /* Challenge Box */
+        .challenge-box {
+            background: #fffbeb; 
+            border: 2px dashed var(--accent-amber);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .challenge-icon {
+            color: var(--accent-amber);
+            font-size: 24px;
+            background: white;
+            padding: 12px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.2);
+            margin-bottom: 15px;
+            margin-top: -45px; /* Float effect */
+        }
+
+        .challenge-content h4 {
+            margin: 0 0 5px;
+            color: #b45309;
+            font-size: 18px;
+            font-family: var(--font-ar);
+        }
+        
+        .challenge-content .en-sub {
+            font-family: var(--font-en);
+            font-size: 12px;
+            font-weight: 700;
+            color: #d97706;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .challenge-content p {
+            margin: 0;
+            font-size: 16px;
+            color: #78350f;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Specific Module Styling */
+        .mod-0 .module-icon { background: linear-gradient(135deg, #64748b 0%, #334155 100%); color: white; }
+        .mod-1 .module-icon { background: linear-gradient(135deg, var(--accent-sky) 0%, var(--primary-indigo) 100%); color: white; }
+        .mod-2 .module-icon { background: linear-gradient(135deg, var(--accent-rose) 0%, #9f1239 100%); color: white; }
+        .mod-3 .module-icon { background: linear-gradient(135deg, var(--accent-amber) 0%, #d97706 100%); color: white; }
+        .mod-4 .module-icon { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); color: white; }
+        .mod-5 .module-icon { background: linear-gradient(135deg, var(--accent-teal) 0%, #0f766e 100%); color: white; }
+        .mod-6 .module-icon { background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%); color: white; box-shadow: 0 0 20px var(--accent-sky); }
+        .mod-6 { border: 2px solid var(--accent-sky); background: #0f172a; }
+        .mod-6 .card-title h2, .mod-6 .card-title h2 span.ar-sub { color: white; }
+        .mod-6 .topic-item { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); }
+        .mod-6 .topic-item:hover { background: rgba(255,255,255,0.1); border-color: var(--accent-sky); }
+        .mod-6 .topic-title .en-head { color: var(--accent-sky); }
+        .mod-6 .topic-title .ar-head { color: white; }
+        .mod-6 .topic-desc { color: #cbd5e1; }
+        .mod-6 .philosophy-box { background: rgba(14, 165, 233, 0.1); border-color: var(--accent-sky); }
+        .mod-6 .philosophy-box p.ar-quote { color: white; }
+        .mod-6 .philosophy-box p.en-quote { color: var(--accent-sky); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .hero h1 span.ar-title { font-size: 28px; }
+            .module-number { opacity: 0.1; font-size: 150px; }
+            .philosophy-box { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge" style="color: white;">THE BEST COURSE IN JORDAN</div>
+        <h1>THE SKIN ARCHITECT<br><span class="ar-title">مهندس البشرة</span></h1>
+        <p class="en-text" style="margin-bottom: 5px; color: var(--accent-sky); font-weight: 600;">CLINICAL DERMATOLOGY & COSMECEUTICAL MASTERY</p>
+        <p>من بائع علب إلى خبير استراتيجي يمتلك عين الطبيب، عقل المهندس، وأدوات المستقبل.</p>
+        
+        <div class="hero-names">
+            <div>
+                <span class="en-text" style="font-size: 14px; color: var(--accent-teal); font-weight: 700;">تقديم</span>
+                <span>د. عبد الله الزيادنة</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Container -->
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+
+        <!-- Module 0: The Genesis -->
+        <div class="module-card mod-0">
+            <div class="module-number">00</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="module-icon"><i class="fas fa-power-off"></i></div>
+                    <div class="card-title">
+                        <h3>MODULE 0</h3>
+                        <h2>THE GENESIS<span class="ar-sub">نقطة التكوين: تحويل العقلية</span></h2>
+                    </div>
+                </div>
+                <div class="philosophy-box">
+                    <p class="en-quote">"The Pharmacist is not a dispenser; he is the first line of defense."</p>
+                    <p class="ar-quote">"الصيدلي ليس مناولاً، بل هو خط الدفاع الأول <br>والمهندس الذي يبني الثقة."</p>
+                </div>
+                <div class="topics-grid">
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">The Pharmacist vs. The Dispenser</span>
+                            <span class="ar-head">الصيدلي مقابل المناول</span>
+                        </div>
+                        <p class="topic-desc">لماذا الجلدية هي فرصتك الذهبية في السوق الأردني (هامش ربح + ولاء).</p>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">The "3-Second Scan" Protocol</span>
+                            <span class="ar-head">بروتوكول الـ 3 ثوانٍ</span>
+                        </div>
+                        <p class="topic-desc">كيف تقرأ وجه المريض وتشخص حالته النفسية والمادية قبل أن يتكلم.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module 1: The Decoder -->
+        <div class="module-card mod-1">
+            <div class="module-number">01</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="module-icon"><i class="fas fa-magnifying-glass"></i></div>
+                    <div class="card-title">
+                        <h3>MODULE 1</h3>
+                        <h2>THE DECODER<span class="ar-sub">فك الشيفرة: الذكاء التشخيصي</span></h2>
+                    </div>
+                </div>
+                <div class="philosophy-box">
+                    <p class="en-quote">"You don't diagnose with a biopsy; you diagnose with patterns."</p>
+                    <p class="ar-quote">"أنت لا تشخص بالخزعة، بل بالأنماط. <br>توقف عن النظر للاحمرار، وانظر للهندسة."</p>
+                </div>
+                <div class="topics-grid">
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">The Alphabet of Skin</span>
+                            <span class="ar-head">أبجدية الجلد (طريقة برايل)</span>
+                        </div>
+                        <p class="topic-desc">الفرق الحسي بين البقعة (Macule) والمطب (Papule) والبركان (Pustule).</p>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">The "Red Flags" Matrix</span>
+                            <span class="ar-head">مصفوفة الخطوط الحمراء</span>
+                        </div>
+                        <p class="topic-desc">متى تعالج بقلب قوي ومتى تحول فوراً (علامة الفراشة، قشرة العسل).</p>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">The Jordanian Patient Profile</span>
+                            <span class="ar-head">قاموس "الشارع الأردني"</span>
+                        </div>
+                        <p class="topic-desc">ترجمة مصطلحات (حزاز، تنميل، حبة ريح) إلى تشخيصات طبية دقيقة.</p>
+                    </div>
+                </div>
+                <div class="challenge-box">
+                    <div class="challenge-icon"><i class="fas fa-puzzle-piece"></i></div>
+                    <div class="challenge-content">
+                        <span class="en-sub">Practical Challenge</span>
+                        <h4>تحدي المحقق كونان الجلدي</h4>
+                        <p>سيتم عرض صورة "Macro" غامضة <br> لآفة جلدية في الجروب السري. 
+                            <br><br>المطلوب: تحديد نوعها الهندسي <br> وهل هي Red Flag أم لا؟</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module 2: The Acne Wars -->
+        <div class="module-card mod-2">
+            <div class="module-number">02</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="module-icon"><i class="fas fa-shield-virus"></i></div>
+                    <div class="card-title">
+                        <h3>MODULE 2</h3>
+                        <h2>THE ACNE WARS<span class="ar-sub">حروب حب الشباب: من البلوغ للنضج</span></h2>
+                    </div>
+                </div>
+                <div class="philosophy-box">
+                    <p class="en-quote">"You are not selling a cream; you are selling 'Hope' and 'Patience'."</p>
+                    <p class="ar-quote">"أنت لا تبيع كريماً، أنت تبيع الأمل والصبر. <br> إذا فقد المريض صبره، فقدت العلاج."</p>
+                </div>
+                <div class="topics-grid">
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">Decoding the Grades</span>
+                            <span class="ar-head">اعرف عدوك</span>
+                        </div>
+                        <p class="topic-desc">التمييز بين الانسداد المروري (Comedonal) والحريق (Inflammatory).</p>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">The "Purging" Conversation</span>
+                            <span class="ar-head">بروتوكول "الأسبوع القبيح"</span>
+                        </div>
+                        <p class="topic-desc">كيف تشرح الـ Purging للمريض وتجعله علامة نجاح بدلاً من فشل.</p>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">Post-Acne Rescue</span>
+                            <span class="ar-head">شبح حب الشباب (الآثار)</span>
+                        </div>
+                        <p class="topic-desc">التفريق الحاسم بين PIE (الأحمر) و PIH (البني) واختيار السلاح المناسب.</p>
+                    </div>
+                </div>
+                <div class="challenge-box">
+                    <div class="challenge-icon"><i class="fas fa-prescription-bottle"></i></div>
+                    <div class="challenge-content">
+                        <span class="en-sub">Practical Challenge</span>
+                        <h4>لعبة الروشيتة الناقصة</h4>
+                        <p>شاب جامعي ميزانيته محدودة، بشرته دهنية جداً ويستخدم صابونة كبريت. <br> صمم له روتين 3 خطوات فعال واقتصادي.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module 3: The Glow & Shadow -->
+        <div class="module-card mod-3">
+            <div class="module-number">03</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="module-icon"><i class="fas fa-sun"></i></div>
+                    <div class="card-title">
+                        <h3>MODULE 3</h3>
+                        <h2>GLOW & SHADOW<span class="ar-sub">الظل والنور: سيمفونية التصبغات</span></h2>
+                    </div>
+                </div>
+                <div class="philosophy-box">
+                    <p class="en-quote">"Pigmentation is a defense mechanism. Don't bleach; negotiate."</p>
+                    <p class="ar-quote">"التصبغ آلية دفاع. <br> لا تهاجمه بعنف فيقاومك <br> بل تفاوض مع الخلية الصبغية بهدوء."</p>
+                </div>
+                <div class="topics-grid">
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">The Melanin Pathway</span>
+                            <span class="ar-head">خط إنتاج المصنع</span>
+                        </div>
+                        <p class="topic-desc">فهم مسار الميلانين (محفز -> إنزيم -> نقل) لاختيار الكوكتيل المثالي.</p>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">Ingredient Intelligence</span>
+                            <span class="ar-head">كوكتيل الأبطال</span>
+                        </div>
+                        <p class="topic-desc">كيف تدمج (Arbutin + Niacinamide + Retinol) دون حرق وجه المريض.</p>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">Melasma vs. Sun Spots</span>
+                            <span class="ar-head">الكلف vs النمش</span>
+                        </div>
+                        <p class="topic-desc">لماذا يحتاج الكلف "الرفق" بينما يحتاج النمش "الهجوم".</p>
+                    </div>
+                </div>
+                <div class="challenge-box">
+                    <div class="challenge-icon"><i class="fas fa-bomb"></i></div>
+                    <div class="challenge-content">
+                        <span class="en-sub">Practical Challenge</span>
+                        <h4>تحدي تصحيح الكوارث</h4>
+                        <p>سيناريو لمريضة استخدمت "الخلطة الثلاثية" لمدة 6 أشهر وتدمر وجهها. <br> المطلوب: خطة الإنقاذ والترميم.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- Module 4: The Fire & Itch -->
+        <div class="module-card mod-4">
+            <div class="module-number">04</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="module-icon"><i class="fas fa-fire"></i></div>
+                    <div class="card-title">
+                        <h3>MODULE 4</h3>
+                        <h2>FIRE & ITCH<span class="ar-sub">النار والحكة: إدارة الأزمات</span></h2>
+                    </div>
+                </div>
+                <div class="philosophy-box">
+                    <p class="en-quote">"If it’s wet, dry it. If it’s dry, wet it. Know your steroid potency."</p>
+                    <p class="ar-quote">"إذا كان رطباً جففه، وإذا كان جافاً رطبه. <br> الكورتيزون سيف ذو حدين، اعرف أي حد تمسك."</p>
+                </div>
+                <div class="topics-grid">
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">The Broken Wall (Eczema)</span>
+                            <span class="ar-head">الجدار المكسور (الإكزيما)</span>
+                        </div>
+                        <p class="topic-desc">استراتيجية (Soak & Seal) بدلاً من الاعتماد الأعمى على الكورتيزون.</p>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">The Corticosteroid Chart</span>
+                            <span class="ar-head">خريطة أسلحة الكورتيزون</span>
+                        </div>
+                        <p class="topic-desc">متى تستخدم المدفعية (Clobetasol) ومتى تستخدم مسدس الماء (Hydrocortisone).</p>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">The Great Imitator (Fungal)</span>
+                            <span class="ar-head">المقلد العظيم (الفطريات)</span>
+                        </div>
+                        <p class="topic-desc">كيف تكتشف "الحلقة النشطة" وتتجنب كارثة Tinea Incognito.</p>
+                    </div>
+                </div>
+                 <div class="challenge-box">
+                    <div class="challenge-icon"><i class="fas fa-baby"></i></div>
+                    <div class="challenge-content">
+                        <span class="en-sub">Practical Challenge</span>
+                        <h4>تحدي الحفاض (Diaper Rash)</h4>
+                        <p>طفل لديه احمرار وبقع "قمر صناعي" (Satellite lesions). <br> ما هو التشخيص وما هو الخطأ في استخدام النشا؟</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module 5: The Architect -->
+        <div class="module-card mod-5">
+            <div class="module-number">05</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="module-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+                    <div class="card-title">
+                        <h3>MODULE 5</h3>
+                        <h2>THE ARCHITECT<span class="ar-sub">المهندس: هندسة الروتين والبيع</span></h2>
+                    </div>
+                </div>
+                <div class="philosophy-box">
+                    <p class="en-quote">"Don't sell the product; sell the outcome. Sell confidence."</p>
+                    <p class="ar-quote">"لا تبع المنتج، بع النتيجة. <br> العميل يشتري روتيناً ليستعيد ثقته، لا ليملأ خزانته."</p>
+                </div>
+                <div class="topics-grid">
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">The "GRIP" System</span>
+                            <span class="ar-head">نظام GRIP المعماري</span>
+                        </div>
+                        <p class="topic-desc">Groom, Restore, Insulate, Protect. كيف تبيع 4 منتجات بدلاً من واحد.</p>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">Consultative Selling</span>
+                            <span class="ar-head">سيكولوجية "غالي"</span>
+                        </div>
+                        <p class="topic-desc">تحويل الاعتراض على السعر إلى نقاش حول "القيمة اليومية" والاستثمار في الذات.</p>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">Vehicle Selection Mastery</span>
+                            <span class="ar-head">اختيار المركبة (Vehicle)</span>
+                        </div>
+                        <p class="topic-desc">لماذا المرهم (Ointment) عدو البشرة الدهنية، واللوشن صديق المناطق المشعرة.</p>
+                    </div>
+                </div>
+                <div class="challenge-box">
+                    <div class="challenge-icon"><i class="fas fa-shopping-basket"></i></div>
+                    <div class="challenge-content">
+                        <span class="en-sub">Practical Challenge</span>
+                        <h4>تحدي سلة المبيعات</h4>
+                        <p>عروس حفلتها بعد شهرين وعندها حبوب ظهر. <br> ابنِ لها روتيناً كاملاً واكتب "الجملة السحرية" لإقناعها.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module 6: The Cyber-Dermatologist -->
+        <div class="module-card mod-6">
+            <div class="module-number" style="opacity: 0.1;">06</div>
+            <div class="card-content">
+                <div class="card-header">
+                    <div class="module-icon"><i class="fas fa-robot"></i></div>
+                    <div class="card-title">
+                        <h3>MODULE 6</h3>
+                        <h2>CYBER-DERMA<span class="ar-sub">السيبرانية: صيدلي المستقبل</span></h2>
+                    </div>
+                </div>
+                <div class="philosophy-box">
+                    <p class="en-quote">"Augment yourself with AI. Leave memorization to the machine."</p>
+                    <p class="ar-quote">"لا تنافس الذكاء الاصطناعي، عزز قدراتك به. <br> اترك الحفظ للآلة، وتفرغ أنت للتشخيص والتعاطف."</p>
+                </div>
+                <div class="topics-grid">
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">INCI List Decoding</span>
+                            <span class="ar-head">رؤية الأشعة السينية</span>
+                        </div>
+                        <p class="topic-desc">كيف تستخدم AI لكشف المنتجات "النصب" وتحليل المكونات في 5 ثوانٍ.</p>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">The Second Brain</span>
+                            <span class="ar-head">بناء العقل الثاني</span>
+                        </div>
+                        <p class="topic-desc">استخدام NotebookLM لإنشاء مرجع شخصي للتداخلات الدوائية الجلدية.</p>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-title">
+                            <span class="en-head">Personal Branding</span>
+                            <span class="ar-head">صيدلي الحي المؤثر</span>
+                        </div>
+                        <p class="topic-desc">كتابة سكريبتات محتوى طبي باللهجة الأردنية باستخدام الذكاء الاصطناعي.</p>
+                    </div>
+                </div>
+                <div class="challenge-box" style="background: rgba(255,255,255,0.1); border-color: var(--accent-sky);">
+                    <div class="challenge-icon" style="background: var(--accent-sky); color: white; box-shadow: 0 0 15px var(--accent-sky);"><i class="fas fa-eye"></i></div>
+                    <div class="challenge-content">
+                        <span class="en-sub" style="color: var(--accent-sky);">Practical Challenge</span>
+                        <h4 style="color: white;">تحدي كشف الحقيقة</h4>
+                        <p style="color: #cbd5e1;">صور منتج "Best Seller" في صيدليتك <br> وحلل مكوناته بالـ AI <br> وافضح عيوبه أو امدح عبقريته.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expansion Styles & HTML -->
+        <style>
+            .expansion-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+                margin-top: 80px;
+                width: 100%;
+            }
+
+            .expansion-card {
+                background: white;
+                border-radius: 20px;
+                padding: 40px 20px;
+                text-align: center;
+                border-top: 6px solid var(--border-light);
+                box-shadow: var(--shadow-card);
+                transition: transform 0.3s;
+            }
+            
+            .expansion-card:hover { transform: translateY(-5px); }
+
+            .expansion-card.body { border-top-color: var(--accent-rose); }
+            .expansion-card.mix { border-top-color: var(--primary-indigo); }
+            .expansion-card.baby { border-top-color: var(--accent-teal); }
+
+            .expansion-icon {
+                font-size: 48px;
+                margin-bottom: 20px;
+                display: inline-block;
+            }
+            
+            .exp-title { font-family: var(--font-en); font-weight: 700; font-size: 18px; color: var(--primary-navy); margin-bottom: 5px; }
+            .exp-sub { font-family: var(--font-ar); font-weight: 600; font-size: 16px; color: var(--text-muted); }
+        </style>
+
+        <h2 style="text-align: center; color: var(--primary-navy); margin-top: 100px; font-family: var(--font-ar); font-weight: 800; font-size: 32px;">
+            FUTURE EXPANSIONS<br><span style="font-size: 24px; color: var(--text-muted);">التوسعات المستقبلية</span>
+        </h2>
+        
+        <div class="expansion-grid">
+            <div class="expansion-card body">
+                <div class="expansion-icon" style="color: var(--accent-rose);"><i class="fas fa-weight-scale"></i></div>
+                <div class="exp-title">THE BODY SCULPTOR</div>
+                <div class="exp-sub">نحّات القوام: إتقان حقن التنحيف</div>
+            </div>
+            <div class="expansion-card mix">
+                <div class="expansion-icon" style="color: var(--primary-indigo);"><i class="fas fa-flask"></i></div>
+                <div class="exp-title">THE ALCHEMIST</div>
+                <div class="exp-sub">الخيميائي: أسرار التركيبات المربحة</div>
+            </div>
+            <div class="expansion-card baby">
+                <div class="expansion-icon" style="color: var(--accent-teal);"><i class="fas fa-baby-carriage"></i></div>
+                <div class="exp-title">GUARDIAN OF THE CRADLE</div>
+                <div class="exp-sub">حارس المهد: طب الأطفال</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer Styles & HTML -->
+    <style>
+        .footer {
+            text-align: center;
+            padding: 100px 20px;
+            background: var(--text-main);
+            color: white;
+            margin-top: 80px;
+            position: relative;
+        }
+        
+        .cta-btn {
+            background: var(--accent-teal);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px rgba(20, 184, 166, 0.4);
+            font-family: var(--font-ar);
+        }
+        
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(20, 184, 166, 0.6);
+            background: #0d9488;
+        }
+    </style>
+
+    <div class="footer">
+        <h2 style="margin-bottom: 20px; font-size: 36px; font-weight: 800;">READY TO BECOME AN ARCHITECT?</h2>
+        <h3 style="margin-bottom: 30px; font-size: 24px; font-weight: 400; color: #94a3b8;">هل أنت جاهز لتكون مهندس بشرة معتمد؟</h3>
+        
+        <p style="color: #cbd5e1; max-width: 600px; margin: 0 auto 50px; font-size: 18px;">
+            انضم الآن إلى مجتمع النخبة <br> واحصل على الأدوات التي تميزك عن 99% من الصيادلة في السوق.
+        </p>
+        
+        <a href="#" class="cta-btn">
+            JOIN THE BACKROOM <span style="margin: 0 10px;">|</span> انضم لنا الآن
+        </a>
+        
+        <p style="margin-top: 80px; font-size: 14px; color: #475569; font-family: var(--font-en);">
+            © 2024 THE SKIN ARCHITECT PROJECT. ALL RIGHTS RESERVED.
+        </p>
+    </div>
+
+</body>
+</html>
