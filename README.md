@@ -64,7 +64,7 @@ The roadmap covers 7 core modules + future expansions:
 ## 👨‍🏫 The Architects | القادة
 
 *   **Dr. Abdullah Al-Zayadneh** - *The Mentor & Clinical Expert*
-*   **Dr. Amr Elnagar** - *The Strategist & Content Architect*
+*   **Dr. Amr Al-najjar** - *The Strategist & Content Architect*
 
 ---
 
